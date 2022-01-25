@@ -1,25 +1,25 @@
 const express = require('express');
-const path = require ('path')
+const path = require('path')
 const app = express();
 const PORT = process.env.PORT || 3001;
 app.use(express.static('public'));
-const notes = 
+const notes =
 
 
-app.get('/notes', (req,res) =>{
-    //send the file notes.html
-    res.sendFile(path.join(__dirname, '/public/notes.html'));
-});
+    app.get('/notes', (req, res) => {
+        //send the file notes.html
+        res.sendFile(path.join(__dirname, '/public/notes.html'));
+    });
 
 
 app.get('/notes', (req, res) => {
     //send the file notes.html
     res.json()
 });
-app.post('api/notes' , (req,res) => {
-//Access the note data
+app.post('api/notes', (req, res) => {
+    //Access the note data
 
-const newNote = req.body;
+    const newNote = req.body;
 
 
 
