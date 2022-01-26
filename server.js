@@ -1,21 +1,35 @@
+
+
 const express = require('express');
 const path = require('path')
 const app = express();
+//set port
 const PORT = process.env.PORT || 3001;
+
+//Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+//linking to the assets folder
 app.use(express.static('public'));
-const notes =
 
+//send the file index.html
+app.get("/", function (req, res) {
 
-    app.get('/notes', (req, res) => {
-        //send the file notes.html
-        res.sendFile(path.join(__dirname, '/public/notes.html'));
-    });
+    res.sendFile(path.join(__dirname, "/public/index.html"));
+});
 
+//send the file notes.html
 
 app.get('/notes', (req, res) => {
-    //send the file notes.html
-    res.json()
+
+    res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
+
+//API Routes
+
+
 app.post('api/notes', (req, res) => {
     //Access the note data
 
