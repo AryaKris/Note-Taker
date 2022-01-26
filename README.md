@@ -8,10 +8,13 @@ Modifying starter code to create an application called Note Taker that can be us
 
 Full link to the functionality of application - https://watch.screencastify.com/v/C2OAiFbVXthio5aGF26c
 
+Link to deployed application in Heroku - https://expressjs-notetaker1.herokuapp.com/
+
+![alt text](./public/assets/image.png)
+
 ## Table of Contents 
 
   * [Process](#Process)
-  * [Usage](#usage)
   * [License](#license)
   * [Contributing](#contributing)
   * [Tests](#tests)
@@ -37,8 +40,6 @@ The following API routes are created:
 * `DELETE /api/notes/:id` receive a query parameter that contains the id of a note to delete. All the notes from the`db.json` file is read and , the note with the given `id` property can be removed.
 
 * Application is deployed to `Heroku`
-
-  ## Usage
 
 
  ## Contributing
