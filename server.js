@@ -97,6 +97,23 @@ app.post('/api/notes', (req, res) => {
     res.json('a message')
 
 });
+app.delete('/api/notes/:id', (req,res)=>{
+    readFromFile('./db/db.json')
+        .then(function (data) {
+            const parsedData = JSON.parse(data);
+        const noteId = req.params.id
+        const newNotesArray = parsedData.filter(note=>note.id!==noteId)
+         writeToFile('./db/db.json', newNotesArray)  
+         res.json ('a message')
+
+        })
+        .catch(function (err) {
+            res.json(err);
+        })
+
+})//anything after / will be saved as id
+
+
 
 app.listen(PORT, () =>
     console.log(`Example app listening at http://localhost:${PORT}`)
