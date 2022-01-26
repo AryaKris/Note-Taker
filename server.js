@@ -2,8 +2,8 @@
 
 const express = require('express');
 const path = require('path')
-const util = require ('util')
-const fs= require ('fs')
+const util = require('util')
+const fs = require('fs')
 const app = express();
 //breaking apart the object - destructuring
 //:uuid4 renames v4 to uuid4
@@ -67,18 +67,18 @@ app.get('/notes', (req, res) => {
 
 //API Routes
 
-app.get ('/api/notes', (req,res)=>{
+app.get('/api/notes', (req, res) => {
     //get infor from the database 
     readFromFile('./db/db.json')
-    .then(function(data){
-        const parsedData = JSON.parse(data);
-        res.json(parsedData);
-        
-    })
-    .catch(function(err){
-        res.json(err);
-    })
-    
+        .then(function (data) {
+            const parsedData = JSON.parse(data);
+            res.json(parsedData);
+
+        })
+        .catch(function (err) {
+            res.json(err);
+        })
+
 })
 
 
@@ -87,33 +87,25 @@ app.post('/api/notes', (req, res) => {
 
     const newNote = req.body;
     newNote.id = uuidv4(); //function returns a truly unique id
-    readAndAppend(newNote,'./db/db.json')
-
-
-
-
-
- //create persistent data
+    readAndAppend(newNote, './db/db.json')
+    //create persistent data
     res.json('a message')
 
 });
-app.delete('/api/notes/:id', (req,res)=>{
+app.delete('/api/notes/:id', (req, res) => {
     readFromFile('./db/db.json')
         .then(function (data) {
             const parsedData = JSON.parse(data);
-        const noteId = req.params.id
-        const newNotesArray = parsedData.filter(note=>note.id!==noteId)
-         writeToFile('./db/db.json', newNotesArray)  
-         res.json ('a message')
-
+            const noteId = req.params.id
+            const newNotesArray = parsedData.filter(note => note.id !== noteId)
+            writeToFile('./db/db.json', newNotesArray)
+            res.json('a message')
         })
         .catch(function (err) {
             res.json(err);
         })
 
 })//anything after / will be saved as id
-
-
 
 app.listen(PORT, () =>
     console.log(`Example app listening at http://localhost:${PORT}`)
