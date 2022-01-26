@@ -5,6 +5,12 @@ const path = require('path')
 const util = require ('util')
 const fs= require ('fs')
 const app = express();
+//breaking apart the object - destructuring
+//:uuid4 renames v4 to uuid4
+const { v4: uuidv4 } = require('uuid');
+// const uuid = require ('uuid')
+// const uuidv4 = uuid.v4
+
 //set port
 const PORT = process.env.PORT || 3001;
 
@@ -76,16 +82,18 @@ app.get ('/api/notes', (req,res)=>{
 })
 
 
-app.post('api/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
     //Access the note data
 
     const newNote = req.body;
+    newNote.id = uuidv4(); //function returns a truly unique id
+    readAndAppend(newNote,'./db/db.json')
 
 
 
 
 
-    //create persistent data
+ //create persistent data
     res.json('a message')
 
 });
