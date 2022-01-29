@@ -52,13 +52,13 @@ const readAndAppend = (content, file) => {
         }
     });
 };
-//send the file index.html
+//send the file to index.html
 app.get("/", function (req, res) {
 
     res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
-//send the file notes.html
+//send the file to notes.html
 
 app.get('/notes', (req, res) => {
 
@@ -73,23 +73,20 @@ app.get('/api/notes', (req, res) => {
         .then(function (data) {
             const parsedData = JSON.parse(data);
             res.json(parsedData);
-
         })
         .catch(function (err) {
             res.json(err);
         })
-
-})
+});
 
 
 app.post('/api/notes', (req, res) => {
     //Access the note data
-
     const newNote = req.body;
     newNote.id = uuidv4(); //function returns a truly unique id
     readAndAppend(newNote, './db/db.json')
     //create persistent data
-    res.json('a message')
+    res.json('Successfully posted')
 
 });
 app.delete('/api/notes/:id', (req, res) => {
@@ -99,7 +96,7 @@ app.delete('/api/notes/:id', (req, res) => {
             const noteId = req.params.id
             const newNotesArray = parsedData.filter(note => note.id !== noteId)
             writeToFile('./db/db.json', newNotesArray)
-            res.json('a message')
+            res.json('Deleted the note successfully')
         })
         .catch(function (err) {
             res.json(err);
